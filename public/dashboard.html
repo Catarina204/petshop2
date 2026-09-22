@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de gerenciamento de Pet Shop - Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #98f1eb, #82c8f4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .dashboard {
+            width: 100%;
+            max-width: 650px;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid #058884;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        #boasVindas {
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 28px;
+        }
+
+        #btnLogout {
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 13px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #btnLogout:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #btnLogout:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 600px) {
+            .dashboard {
+                padding: 30px 20px;
+            }
+
+            .logo {
+                width: 140px;
+                height: 140px;
+            }
+
+            #boasVindas {
+                font-size: 22px;
+            }
+
+            #btnLogout {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- Imagem -->
+        <img src="snoopy.gif" alt="Snoopy" class="logo">
+
+        <h1 id="boasVindas">
+            Dashboard - Bem-vindo!
+        </h1>
+
+        <button id="btnLogout">
+            Sair
+        </button>
+
+    </div>
+
+    <script>
+        const usuarioSalvo = localStorage.getItem('usuarioLogado');
+
+        // Se não houver usuário logado ou for um valor inválido,
+        // volta para o login
+        if (!usuarioSalvo || usuarioSalvo === 'undefined') {
+            window.location.href = 'index.html';
+        } else {
+            const usuarioDados = JSON.parse(usuarioSalvo);
+
+            document.getElementById('boasVindas').innerText =
+                `Dashboard - Bem-vindo, ${usuarioDados.email}!`;
+        }
+
+        // Função do botão Sair
+        document.getElementById('btnLogout').addEventListener('click', () => {
+            localStorage.removeItem('usuarioLogado');
+            window.location.href = 'index.html';
+        });
+    </script>
+
+</body>
+</html>
