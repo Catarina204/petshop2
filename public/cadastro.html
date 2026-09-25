@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastro de Pet</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px 15px;
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(56, 189, 248, 0.35),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #064e3b,
+                    #0f766e,
+                    #14b8a6,
+                    #38bdf8
+                );
+        }
+
+
+        .login-card {
+            width: 100%;
+            max-width: 500px;
+
+            padding: 35px;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            border-radius: 24px;
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.25);
+
+            backdrop-filter: blur(10px);
+        }
+
+
+        .login-card h2 {
+            margin-bottom: 8px;
+
+            text-align: center;
+
+            font-size: 30px;
+
+            color: #065f46;
+        }
+
+        .login-card h2::after {
+            content: "🐾";
+
+            display: block;
+
+            margin-top: 8px;
+
+            font-size: 25px;
+        }
+
+
+
+        #petForm {
+            display: flex;
+            flex-direction: column;
+
+            gap: 15px;
+
+            margin-top: 25px;
+        }
+
+
+        #petForm input,
+        #petForm select {
+            width: 100%;
+
+            height: 50px;
+
+            padding: 0 15px;
+
+            border: 2px solid #ccfbf1;
+
+            border-radius: 12px;
+
+            outline: none;
+
+            background: #f0fdfa;
+
+            color: #134e4a;
+
+            font-size: 15px;
+
+            transition: 0.3s ease;
+        }
+
+        /* Placeholder */
+
+        #petForm input::placeholder {
+            color: #94a3b8;
+        }
+
+        /* Focus */
+
+        #petForm input:focus,
+        #petForm select:focus {
+            border-color: #14b8a6;
+
+            background: #ffffff;
+
+            box-shadow:
+                0 0 0 4px rgba(20, 184, 166, 0.15);
+        }
+
+
+        #petForm select {
+            cursor: pointer;
+
+            appearance: none;
+
+            background-image:
+                linear-gradient(45deg, transparent 50%, #0f766e 50%),
+                linear-gradient(135deg, #0f766e 50%, transparent 50%);
+
+            background-position:
+                calc(100% - 20px) 21px,
+                calc(100% - 14px) 21px;
+
+            background-size:
+                6px 6px,
+                6px 6px;
+
+            background-repeat: no-repeat;
+        }
+
+
+        #petForm label {
+            margin-top: 5px;
+
+            margin-bottom: -8px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            color: #115e59;
+        }
+
+
+        #imagem {
+            height: auto !important;
+
+            padding: 12px !important;
+
+            cursor: pointer;
+
+            background: #ecfdf5 !important;
+        }
+
+        #imagem::file-selector-button {
+            margin-right: 12px;
+
+            padding: 9px 14px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #0f766e;
+
+            color: white;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        #imagem::file-selector-button:hover {
+            background: #115e59;
+        }
+
+
+        #petForm button {
+            width: 100%;
+
+            height: 52px;
+
+            margin-top: 10px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #047857,
+                    #0f766e,
+                    #14b8a6
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+
+            box-shadow:
+                0 8px 20px rgba(15, 118, 110, 0.25);
+        }
+
+        #petForm button:hover {
+            transform: translateY(-2px);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #065f46,
+                    #0d9488
+                );
+
+            box-shadow:
+                0 12px 25px rgba(15, 118, 110, 0.35);
+        }
+
+        #petForm button:active {
+            transform: translateY(0);
+        }
+
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 20px 12px;
+            }
+
+            .login-card {
+                padding: 25px 20px;
+
+                border-radius: 18px;
+            }
+
+            .login-card h2 {
+                font-size: 25px;
+            }
+
+            #petForm {
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-card">
+        <h2>Cadastrar Pet</h2>
+        <form id="petForm">
+            <input type="text" id="tutor" placeholder="Nome do Tutor" required>
+            <input type="email" id="email" placeholder="Email do Tutor" required>
+            <input type="password" id="senha" placeholder="Senha" required >
+            <input type="text" id="nomePet" placeholder="Nome do Animal" required>
+            <input type="text" id="raca" placeholder="Raça" required>
+
+            <select id="genero" required>
+                <option value="">Gênero...</option>
+                <option value="Fêmea">Fêmea</option>
+                <option value="Macho">Macho</option>
+            </select>
+
+            <input type="number" id="peso" step="0.1" min="0" placeholder="Peso (kg)" required>
+            <input type="number" id="idade" min="0" placeholder="Idade (anos)" required>
+
+            <label for="imagem">Foto do Pet</label>
+            <input type="file" id="imagem" accept="image/*" required>
+
+            <button type="submit">Cadastrar Pet</button>
+
+        </form>
+    </div>
+
+
+    <script>
+
+
+        const petForm = document.getElementById("petForm");
+
+
+        petForm.addEventListener("submit", async (e) => {
+
+            e.preventDefault();
+
+            const tutor = document
+                .getElementById("tutor")
+                .value
+                .trim();
+
+            const email = document
+                .getElementById("email")
+                .value
+                .trim();
+
+            const senha = document
+                .getElementById("senha")
+                .value;
+
+            const nomePet = document
+                .getElementById("nomePet")
+                .value
+                .trim();
+
+            const raca = document
+                .getElementById("raca")
+                .value
+                .trim();
+
+            const genero = document
+                .getElementById("genero")
+                .value;
+
+            const peso = document
+                .getElementById("peso")
+                .value;
+
+            const idade = document
+                .getElementById("idade")
+                .value;
+
+            const imagem = document
+                .getElementById("imagem")
+                .files[0];
+
+
+    
+
+            if (
+                !tutor ||
+                !email ||
+                !senha ||
+                !nomePet ||
+                !raca ||
+                !genero ||
+                !peso ||
+                !idade ||
+                !imagem
+            ) {
+
+                alert("Preencha todos os campos!");
+
+                return;
+            }
+
+
+            if (!imagem.type.startsWith("image/")) {
+
+                alert("Selecione uma imagem válida.");
+
+                return;
+            }
+
+
+            const formData = new FormData();
+
+            formData.append("tutor", tutor);
+            formData.append("email", email);
+            formData.append("senha", senha);
+            formData.append("nomePet", nomePet);
+            formData.append("raca", raca);
+            formData.append("genero", genero);
+            formData.append("peso", peso);
+            formData.append("idade", idade);
+            formData.append("imagem", imagem);
+
+
+            try {
+
+                const response = await fetch(
+                    "http://localhost:3000/api/vest",
+                    {
+                        method: "POST",
+
+                        body: formData
+                    }
+                );
+
+
+                const data = await response.json();
+
+
+                if (response.ok) {
+
+                    alert(
+                        data.message ||
+                        "Pet cadastrado com sucesso!"
+                    );
+
+                    petForm.reset();
+
+                } else {
+
+                    alert(
+                        data.message ||
+                        "Erro ao realizar o cadastro."
+                    );
+                }
+
+
+            } catch (error) {
+
+                console.error(
+                    "Erro na requisição:",
+                    error
+                );
+
+                alert(
+                    "Não foi possível conectar ao servidor."
+                );
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

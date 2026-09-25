@@ -96,7 +96,6 @@
 
     <div class="dashboard">
 
-        <!-- Imagem -->
         <img src="snoopy.gif" alt="Snoopy" class="logo">
 
         <h1 id="boasVindas">
@@ -112,8 +111,7 @@
     <script>
         const usuarioSalvo = localStorage.getItem('usuarioLogado');
 
-        // Se não houver usuário logado ou for um valor inválido,
-        // volta para o login
+      
         if (!usuarioSalvo || usuarioSalvo === 'undefined') {
             window.location.href = 'index.html';
         } else {
@@ -123,7 +121,6 @@
                 `Dashboard - Bem-vindo, ${usuarioDados.email}!`;
         }
 
-        // Função do botão Sair
         document.getElementById('btnLogout').addEventListener('click', () => {
             localStorage.removeItem('usuarioLogado');
             window.location.href = 'index.html';
